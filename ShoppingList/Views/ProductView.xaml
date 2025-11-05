@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShoppingList.Views.ProductView">
+    <Border Stroke="Gray" StrokeShape="RoundRectangle 10" Padding="10">
+        <VerticalStackLayout Spacing="8">
+            <Label 
+                x:Name="NameLabel"
+                FontSize="18"/>
+            <Label 
+                x:Name="UnitLabel"
+                FontSize="14"
+                TextColor="Gray"/>
+
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button
+                    Text="-"
+                    Clicked="OnMinusClicked"
+                    WidthRequest="40"/>
+                <Entry
+                    x:Name="QuantityEntry"
+                    WidthRequest="60"
+                    Keyboard="Numeric"
+                    HorizontalTextAlignment="Center"/>
+                <Button
+                    Text="+"
+                    Clicked="OnPlusClicked"
+                    WidthRequest="40"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Button
+                    Text="Bought"
+                    Clicked="OnBoughtClicked"
+                    BackgroundColor="Green"/>
+                <Button
+                    Text="Delete"
+                    Clicked="OnDeleteClicked"
+                    BackgroundColor="Tomato"/>
+            </HorizontalStackLayout>
+            
+        </VerticalStackLayout>
+    </Border>
+</ContentView>
