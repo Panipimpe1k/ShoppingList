@@ -1,0 +1,19 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:ShoppingList.Views"
+             x:Class="ShoppingList.Views.MainPage"
+             Title="Shopping List">
+
+    <VerticalStackLayout Spacing="10" Padding="20">
+
+        <Entry x:Name="ProductNameEntry" Placeholder="Product name"/>
+        <Entry x:Name="UnitEntry" Placeholder="Unit"/>
+        <Entry x:Name="QuantityEntry" Placeholder="Quantity" Keyboard="Numeric"/>
+        <Button Text="Add Product" Clicked="OnAddClicked"/>
+
+        <ScrollView HeightRequest="400">
+            <VerticalStackLayout x:Name="ProductContainer" Spacing="10"/>
+        </ScrollView>
+
+    </VerticalStackLayout>
+</ContentPage>

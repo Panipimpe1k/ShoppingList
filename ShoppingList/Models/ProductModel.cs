@@ -12,7 +12,7 @@ namespace ShoppingList.Models
         public int Quantity { get; set; }
         public bool IsBought { get; set; }
 
-        public ProductModel(string name, string unit, int quantity = 1)
+        public ProductModel(string name, string unit, int quantity)
         {
             Name = name;
             Unit = unit;
