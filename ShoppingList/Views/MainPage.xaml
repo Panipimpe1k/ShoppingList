@@ -7,7 +7,17 @@
     <VerticalStackLayout Spacing="10" Padding="20">
 
         <Entry x:Name="ProductNameEntry" Placeholder="Product name"/>
-        <Entry x:Name="UnitEntry" Placeholder="Unit"/>
+
+        <Picker x:Name="UnitPicker" Title="Unit">
+            <Picker.Items>
+                <x:String>pcs</x:String>
+                <x:String>kg</x:String>
+                <x:String>g</x:String>
+                <x:String>l</x:String>
+                <x:String>ml</x:String>
+            </Picker.Items>
+        </Picker>
+        
         <Entry x:Name="QuantityEntry" Placeholder="Quantity" Keyboard="Numeric"/>
         <Button Text="Add Product" Clicked="OnAddClicked"/>
 

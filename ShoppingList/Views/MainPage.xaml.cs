@@ -15,10 +15,11 @@ public partial class MainPage : ContentPage
     private async void OnAddClicked(object sender, EventArgs e)
     {
         var name = string.IsNullOrWhiteSpace(ProductNameEntry.Text) ? "Unnamed" : ProductNameEntry.Text;
-        var unit = string.IsNullOrWhiteSpace(UnitEntry.Text) ? "pcs" : UnitEntry.Text;
+
+        var unit = UnitPicker.SelectedItem?.ToString() ?? "pcs";
 
         int quantity;
-        if (!int.TryParse(QuantityEntry.Text, out quantity))
+        if (!int.TryParse(QuantityEntry.Text, out quantity) || quantity <= 0)
         {
             quantity = 1;
             await DisplayAlert("Warning", "Invalid quantity. Replaced with 1", "OK");
@@ -31,11 +32,12 @@ public partial class MainPage : ContentPage
         ProductContainer.Children.Add(view);
 
         ProductNameEntry.Text = string.Empty;
-        UnitEntry.Text = string.Empty;
+        UnitPicker.SelectedIndex = -1;
         QuantityEntry.Text = string.Empty;
 
         SaveProducts();
     }
+
 
     private void SaveProducts()
     {
