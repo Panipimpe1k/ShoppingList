@@ -11,13 +11,16 @@ namespace ShoppingList.Models
         public string Unit { get; set; }
         public int Quantity { get; set; }
         public bool IsBought { get; set; }
+        public string Store { get; set; }
 
-        public ProductModel(string name, string unit, int quantity)
+
+        public ProductModel(string name, string unit, int quantity, string store)
         {
             Name = name;
             Unit = unit;
             Quantity = quantity;
             IsBought = false;
+            Store = store;
         }
     }
 }

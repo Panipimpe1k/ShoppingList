@@ -1,29 +1,82 @@
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:views="clr-namespace:ShoppingList.Views"
-             x:Class="ShoppingList.Views.MainPage"
-             Title="Shopping List">
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:ShoppingList.Views"
+    x:Class="ShoppingList.Views.MainPage"
+    Title="Shopping List">
 
-    <VerticalStackLayout Spacing="10" Padding="20">
+    <VerticalStackLayout Padding="20" Spacing="15">
 
-        <Entry x:Name="ProductNameEntry" Placeholder="Product name"/>
+        <HorizontalStackLayout Spacing="10">
+            <Button x:Name="CategoriesModeButton"
+                    Text="Categories"
+                    Clicked="OnCategoriesModeClicked"
+                    HorizontalOptions="Fill"/>
 
-        <Picker x:Name="UnitPicker" Title="Unit">
-            <Picker.Items>
-                <x:String>pcs</x:String>
-                <x:String>kg</x:String>
-                <x:String>g</x:String>
-                <x:String>l</x:String>
-                <x:String>ml</x:String>
-            </Picker.Items>
-        </Picker>
-        
-        <Entry x:Name="QuantityEntry" Placeholder="Quantity" Keyboard="Numeric"/>
-        <Button Text="Add Product" Clicked="OnAddClicked"/>
+            <Button x:Name="ShoppingModeButton"
+                    Text="Shopping List"
+                    Clicked="OnShoppingModeClicked"
+                    HorizontalOptions="Fill"/>
+        </HorizontalStackLayout>
 
-        <ScrollView HeightRequest="400">
-            <VerticalStackLayout x:Name="ProductContainer" Spacing="10"/>
+        <Picker x:Name="StoreFilterPicker"
+                Title="Filter by store"
+                IsVisible="False"
+                HorizontalOptions="Fill" />
+
+
+        <Button x:Name="ToggleAddPanelButton"
+                Text="Show add product"
+                Clicked="OnToggleAddPanelClicked"
+                HorizontalOptions="Fill" />
+
+        <Frame x:Name="AddPanelFrame"
+               IsVisible="False"
+               Padding="12"
+               Margin="0,10,0,0"
+               CornerRadius="10"
+               BorderColor="LightGray"
+               BackgroundColor="#FAFAFA">
+
+            <VerticalStackLayout Spacing="10">
+
+                <Picker x:Name="CategoryPicker"
+                        Title="Category"
+                        HorizontalOptions="Fill" />
+
+                <Picker x:Name="UnitPicker"
+                        Title="Unit"
+                        HorizontalOptions="Fill" />
+
+                <Picker x:Name="StorePicker"
+                        Title="Store"
+                        HorizontalOptions="Fill" />
+
+                <Entry x:Name="ProductNameEntry"
+                       Placeholder="Product name" />
+
+                <Entry x:Name="QuantityEntry"
+                       Placeholder="Quantity"
+                       Keyboard="Numeric" />
+
+                <HorizontalStackLayout Spacing="10">
+                    <Button Text="Add"
+                            Clicked="OnAddClicked"
+                            HorizontalOptions="FillAndExpand" />
+                    <Button Text="Cancel"
+                            Clicked="OnCancelAddClicked"
+                            HorizontalOptions="FillAndExpand" />
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </Frame>
+
+        <ScrollView>
+            <VerticalStackLayout x:Name="MainContainer"
+                                 Spacing="10" />
         </ScrollView>
 
     </VerticalStackLayout>
+
 </ContentPage>

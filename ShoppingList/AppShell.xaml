@@ -5,7 +5,7 @@
     xmlns:views="clr-namespace:ShoppingList.Views">
 
     <ShellContent
-        Title="ShoppingList"
+        Title="Shopping List"
         ContentTemplate="{DataTemplate views:MainPage}"
         Route="MainPage" />
 </Shell>

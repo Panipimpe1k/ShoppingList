@@ -11,6 +11,10 @@
                 x:Name="UnitLabel"
                 FontSize="14"
                 TextColor="Gray"/>
+            <Label 
+                 x:Name="StoreLabel"
+                 FontSize="14"
+                 TextColor="Gray"/> 
 
             <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                 <Button

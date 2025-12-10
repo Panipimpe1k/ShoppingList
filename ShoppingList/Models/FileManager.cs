@@ -20,5 +20,23 @@ namespace ShoppingList.Models
             var json = File.ReadAllText(FilePath);
             return JsonSerializer.Deserialize<List<ProductModel>>(json) ?? new();
         }
+
+        private static readonly string CategoryPath =
+        Path.Combine(FileSystem.AppDataDirectory, "categories.json");
+
+        public static void SaveCategories(List<CategoryModel> categories)
+        {
+            var json = JsonSerializer.Serialize(categories);
+            File.WriteAllText(CategoryPath, json);
+        }
+
+        public static List<CategoryModel> LoadCategories()
+        {
+            if (!File.Exists(CategoryPath))
+                return new List<CategoryModel>();
+
+            var json = File.ReadAllText(CategoryPath);
+            return JsonSerializer.Deserialize<List<CategoryModel>>(json) ?? new();
+        }
     }
 }

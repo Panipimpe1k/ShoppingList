@@ -1,4 +1,3 @@
-using Microsoft.Maui.Controls;
 using ShoppingList.Models;
 
 namespace ShoppingList.Views;
@@ -7,15 +6,19 @@ public partial class ProductView : ContentView
 {
 	private readonly ProductModel _model;
 	private readonly Action _onChanged;
-	public ProductView(ProductModel model, Action onChanged)
+    private readonly Action _refreshUI;
+    public ProductView(ProductModel model, Action onChanged, Action refreshUI = null)
 	{
 		InitializeComponent();
 		_model = model;
 		_onChanged = onChanged;
+		_refreshUI = refreshUI;
+
 
 		NameLabel.Text = model.Name;
 		UnitLabel.Text = $"Unit: {model.Unit}";
 		QuantityEntry.Text = model.Quantity.ToString();
+		StoreLabel.Text = $"Store: {model.Store}";
 
 		UpdateVisualState();
 	}
@@ -40,6 +43,7 @@ public partial class ProductView : ContentView
 		_model.IsBought = !_model.IsBought;
 		UpdateVisualState();
 		_onChanged?.Invoke();
+		_refreshUI.Invoke();
     }
 
     private void OnDeleteClicked(object sender, EventArgs e)
