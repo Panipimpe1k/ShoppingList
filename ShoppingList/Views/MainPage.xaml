@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:ShoppingList.Views"
     x:Class="ShoppingList.Views.MainPage"
-    Title="Shopping List">
+    Title="Shopping List"
+    Background="#754437">
 
     <VerticalStackLayout Padding="20" Spacing="15">
 
@@ -12,12 +13,14 @@
             <Button x:Name="CategoriesModeButton"
                     Text="Categories"
                     Clicked="OnCategoriesModeClicked"
-                    HorizontalOptions="Fill"/>
+                    HorizontalOptions="Fill"
+                    BackgroundColor="DarkOliveGreen"/>
 
             <Button x:Name="ShoppingModeButton"
                     Text="Shopping List"
                     Clicked="OnShoppingModeClicked"
-                    HorizontalOptions="Fill"/>
+                    HorizontalOptions="Fill"
+                    BackgroundColor="Beige"/>
         </HorizontalStackLayout>
 
         <Picker x:Name="StoreFilterPicker"
@@ -29,17 +32,20 @@
         <Button x:Name="ToggleAddPanelButton"
                 Text="Show add product"
                 Clicked="OnToggleAddPanelClicked"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill"
+                BackgroundColor="#3a692d"/>
+        
+        
 
         <Frame x:Name="AddPanelFrame"
                IsVisible="False"
-               Padding="12"
+               Padding="5"
                Margin="0,10,0,0"
                CornerRadius="10"
-               BorderColor="LightGray"
-               BackgroundColor="#FAFAFA">
+               BackgroundColor="#693e32"
+               >
 
-            <VerticalStackLayout Spacing="10">
+            <VerticalStackLayout Spacing="10" Background="#754437">
 
                 <Picker x:Name="CategoryPicker"
                         Title="Category"
@@ -72,7 +78,7 @@
             </VerticalStackLayout>
         </Frame>
 
-        <ScrollView>
+        <ScrollView Grid.Row="1">
             <VerticalStackLayout x:Name="MainContainer"
                                  Spacing="10" />
         </ScrollView>
