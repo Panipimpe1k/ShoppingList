@@ -6,6 +6,7 @@
         <Button x:Name="HeaderButton"
                 Clicked="OnToggle"
                 BackgroundColor="LightGray"/>
+
         <VerticalStackLayout x:Name="ProductsContainer" IsVisible="True"/>
     </VerticalStackLayout>
 </ContentView>

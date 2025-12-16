@@ -17,12 +17,14 @@ public partial class CategoryView : ContentView
 		HeaderButton.Text = model.Name;
 		RefreshProducts();
 	}
+
 	private void OnToggle(object sender, EventArgs e)
 	{
 		Model.IsExpanded = !Model.IsExpanded;
 		ProductsContainer.IsVisible = Model.IsExpanded;
 		_save();
 	}
+
 	public void RefreshProducts()
 	{
 		ProductsContainer.Children.Clear();

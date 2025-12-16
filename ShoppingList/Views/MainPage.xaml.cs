@@ -213,6 +213,50 @@ public partial class MainPage : ContentPage
         RefreshCategoryPicker();
         RefreshUI();
     }
+    private void OnCancelAddCategoryClicked(object sender, EventArgs e)
+    {
+        NewCategoryEntry.Text = string.Empty;
+        AddCategoryFrame.IsVisible = false;
+        ToggleAddCategoryButton.Text = "Show add category";
+    }
+
+    private async void OnAddCategoryFromPanelClicked(object sender, EventArgs e)
+    {
+        var name = NewCategoryEntry.Text?.Trim();
+
+        if (string.IsNullOrEmpty(name))
+        {
+            await DisplayAlert("Error", "Category name cannot be empty.", "OK");
+            return;
+        }
+
+        if (_categories.Any(c =>
+            c.Name.Equals(name, StringComparison.OrdinalIgnoreCase)))
+        {
+            await DisplayAlert("Error", "This category already exists.", "OK");
+            return;
+        }
+
+        _categories.Add(new CategoryModel(name));
+
+        SaveCategories();
+        RefreshCategoryPicker();
+        RefreshUI();
+
+        NewCategoryEntry.Text = string.Empty;
+        AddCategoryFrame.IsVisible = false;
+        ToggleAddCategoryButton.Text = "Show add category";
+    }
+
+    private void OnToggleAddCategoryClicked(object sender, EventArgs e)
+    {
+        bool visible = AddCategoryFrame.IsVisible;
+        AddCategoryFrame.IsVisible = !visible;
+        ToggleAddCategoryButton.Text = visible
+            ? "Show add category"
+            : "Hide add category";
+    }
+
 
     public void ForceRefresh() => RefreshUI();
 }
