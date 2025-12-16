@@ -31,6 +31,18 @@
                     IsVisible="False"
                     HorizontalOptions="Fill"/>
 
+            <Entry x:Name="NameFilterEntry"
+                    Placeholder="Filter by name"
+                    IsVisible="False"
+                    ReturnType="Search"
+                    HorizontalOptions="Fill"/>
+
+            <Entry x:Name="QuantityFilterEntry"
+                    Placeholder="Filter by Quantity"
+                    Keyboard="Numeric"
+                    IsVisible="False"
+                    HorizontalOptions="Fill"/>
+
             <Button x:Name="ToggleAddPanelButton"
                     Text="Show add product"
                     Clicked="OnToggleAddPanelClicked"

@@ -10,7 +10,7 @@ namespace ShoppingList.Views;
 public partial class MainPage : ContentPage
 {
     private readonly List<CategoryModel> _categories = new();
-    private readonly List<string> _stores = new() { "All", "Biedronka", "Lidl", "Kaufland", "Selgros", "Auchan" };
+    private readonly List<string> _stores = new() { "All", "Biedronka", "Lidl", "Kaufland", "Selgros", "Auchan", "Other"};
     private readonly List<string> _units = new() { "pcs", "kg", "g", "l", "ml" };
     private bool _shoppingMode = false;
 
@@ -19,11 +19,19 @@ public partial class MainPage : ContentPage
         InitializeComponent();
         UnitPicker.ItemsSource = _units;
         StorePicker.ItemsSource = _stores.Where(s => s != "All").ToList();
+
         StoreFilterPicker.ItemsSource = _stores;
         StoreFilterPicker.SelectedIndex = 0;
-        StoreFilterPicker.SelectedIndexChanged += OnStoreFilterChanged;
+        StoreFilterPicker.SelectedIndexChanged += OnFilterChanged;
+
+        NameFilterEntry.TextChanged += OnFilterChanged;
+        QuantityFilterEntry.TextChanged += OnFilterChanged;
+
+
+
         ToggleAddPanelButton.Text = "Show add product";
         AddPanelFrame.IsVisible = false;
+
         LoadCategoriesAndInitUI();
     }
 
@@ -81,14 +89,26 @@ public partial class MainPage : ContentPage
     private void DisplayShoppingList()
     {
         string selectedStore = StoreFilterPicker.SelectedItem?.ToString() ?? "All";
+        string nameFilter = NameFilterEntry.Text?.Trim().ToLower();
+
+        bool quantityValid = int.TryParse(QuantityFilterEntry.Text, out int quantityFilter);
+
         var items = _categories
             .SelectMany(cat => cat.Products.Select(p => new { Category = cat.Name, Product = p }))
             .Where(x => !x.Product.IsBought)
+
             .Where(x => selectedStore == "All" || x.Product.Store == selectedStore)
+
+            .Where(x => string.IsNullOrEmpty(nameFilter) || x.Product.Name.ToLower().Contains(nameFilter))
+
+            .Where(x => !quantityValid || x.Product.Quantity == quantityFilter)
+
             .OrderBy(x => x.Category)
             .ThenBy(x => x.Product.Name)
             .ToList();
+
         string lastCategory = null;
+
         foreach (var item in items)
         {
             if (lastCategory != item.Category)
@@ -164,6 +184,8 @@ public partial class MainPage : ContentPage
     {
         _shoppingMode = false;
         StoreFilterPicker.IsVisible = false;
+        NameFilterEntry.IsVisible = false;
+        QuantityFilterEntry.IsVisible = false;
         RefreshUI();
     }
 
@@ -171,10 +193,12 @@ public partial class MainPage : ContentPage
     {
         _shoppingMode = true;
         StoreFilterPicker.IsVisible = true;
+        NameFilterEntry.IsVisible = true;
+        QuantityFilterEntry.IsVisible = true;
         RefreshUI();
     }
 
-    private void OnStoreFilterChanged(object sender, EventArgs e)
+    private void OnFilterChanged(object sender, EventArgs e)
     {
         if (_shoppingMode)
             RefreshUI();
