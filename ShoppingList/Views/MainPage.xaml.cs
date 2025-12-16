@@ -182,9 +182,7 @@ public partial class MainPage : ContentPage
 
     private async void OnAddCategoryClicked(object sender, EventArgs e)
     {
-        string result = await DisplayPromptAsync("New category", "Enter category name:");
-        if (string.IsNullOrWhiteSpace(result)) return;
-        var name = result.Trim();
+        var name = string.IsNullOrWhiteSpace(NewCategoryEntry.Text) ? "Unnamed" : NewCategoryEntry.Text.Trim();
         if (_categories.Any(c => c.Name.Equals(name, StringComparison.OrdinalIgnoreCase)))
         {
             await DisplayAlert("Info", "Category already exists.", "OK");
@@ -194,6 +192,9 @@ public partial class MainPage : ContentPage
         SaveCategories();
         RefreshCategoryPicker();
         RefreshUI();
+        NewCategoryEntry.Text = string.Empty;
+        AddCategoryFrame.IsVisible = false;
+        ToggleAddCategoryButton.Text = "Show add category";
     }
 
     private async void OnDeleteCategoryClicked(object sender, EventArgs e)
